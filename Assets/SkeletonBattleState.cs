@@ -26,12 +26,9 @@ public class SkeletonBattleState : EnemyState
     public override void Update()
     {
         base.Update();
-
-        if (enemy.IsPlayerDetected().distance < enemy.attackDistance)
+        if (enemy.IsPlayerDetected().distance < enemy.attackDistance && enemy.IsPlayerDetected().collider != null && CanAttack())
         {
-            Debug.Log("I ATTACK");
-            enemy.ZeroVelocity();
-            return;
+            stateMachine.ChangeState(enemy.attackState); 
         }
 
         if (player.position.x > enemy.transform.position.x)
@@ -43,5 +40,15 @@ public class SkeletonBattleState : EnemyState
             moveDir = -1;
         }
         enemy.SetVelocity(enemy.moveSpeed * moveDir, rb.velocity.y);
+    }
+
+    private bool CanAttack()
+    {
+        if (Time.time >= enemy.lastTimeAttacked + enemy.attackCooldown)
+        {
+            //enemy.lastTimeAttacked = Time.time;
+            return true;
+        }
+        return false;
     }
 }

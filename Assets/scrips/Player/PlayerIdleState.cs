@@ -12,7 +12,7 @@ public class PlayerIdleState : PlayerGroundedState
     {
         base.Enter();
         //BUG3 FIX BEGIN
-        player.ZeroVelocity();
+        player.SetZeroVelocity();
         //BUG3 FIX END
     }
 
@@ -31,7 +31,7 @@ public class PlayerIdleState : PlayerGroundedState
         //    return;
         //}
 
-        if (xInput != 0 && !player.isBusy)
+        if (xInput != 0 && !player.isBusy)//忙于攻击不能立刻转到move，防止攻击时平移
         {
             stateMachine.ChangeState(player.moveState);
         }
