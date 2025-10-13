@@ -1,0 +1,51 @@
+###################################
+# Unity Personal Project .gitignore
+# Author: Yuri
+###################################
+
+# === Unity generated folders ===
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+CrashReports/
+
+# === Unity auto-generated project files ===
+*.csproj
+*.sln
+*.unityproj
+*.pidb
+*.suo
+*.user
+*.userprefs
+*.userosscache
+
+# === Visual Studio / Rider ===
+.vs/
+.idea/
+*.svd
+
+# === OS system files ===
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# === Other cache / temporary ===
+sysinfo.txt
+*.stacktrace
+
+# === Keep the following important folders ===
+# (DO NOT ignore these)
+!Assets/
+!Packages/
+!ProjectSettings/
+!UserSettings/
+!.vsconfig
+!.gitignore
+###################################
+# End of file
+###################################
