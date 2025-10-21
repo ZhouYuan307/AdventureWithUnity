@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class Player : Entity
 {
-    //BugLog
-    //BUG1跳跃状态无法触发滑墙（即上升时）
-    //[FIXED]BUG2触发滑墙瞬间按ad转向会导致滑墙动画翻转(原因是airstate在执行切换状态机操作后会继续执行update剩余内容，需要提前返回)
-    //[FIXED]BUG3半空下墙会导致持续滑行(在idlestate进入时速度置零即可)
-    //[FIXED]BUG4状态紊乱，由于return的退出作用域问题，子类MoveState的update退出不及时，导致攻击状态获得速度
-    //[FIXED]BUG5连招期间无法转向，必须停下攻击
+
 
     [Header("Attack details")]
     public Vector2[] attackMovement;

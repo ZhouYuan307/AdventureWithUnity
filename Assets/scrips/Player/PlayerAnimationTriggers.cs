@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static System.Math;
 
 public class PlayerAnimationTriggers : MonoBehaviour
 {
+    private float hitDir;
     private Player player => GetComponentInParent<Player>();
 
     private void AnimationTrigger()
@@ -18,7 +20,9 @@ public class PlayerAnimationTriggers : MonoBehaviour
         {
             if (hit.GetComponent<Enemy>() != null)
             {
-                hit.GetComponent<Enemy>().Damage();
+                hitDir = Sign(hit.GetComponent<Enemy>().rb.position.x - player.rb.position.x);
+
+                hit.GetComponent<Enemy>().Damage(hitDir);
             }
         }
     }

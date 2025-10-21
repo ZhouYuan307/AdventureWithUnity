@@ -370,8 +370,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   knockbackDirection: {x: 0, y: 0}
   knockbackDuration: 0
-  attackCheck: {fileID: 1934818627}
-  attackCheckRadius: 0.9
   groundCheck: {fileID: 999929288}
   groundCheckDistance: 0.15
   wallCheck: {fileID: 1514260702}
@@ -379,6 +377,8 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
+  attackCheck: {fileID: 1934818627}
+  attackCheckRadius: 0.9
   attackMovement:
   - {x: 3, y: 1}
   - {x: 1, y: 1}
@@ -397,7 +397,7 @@ Transform:
   m_GameObject: {fileID: 190927332}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 28.38, y: -2.63, z: 0}
+  m_LocalPosition: {x: 2.29, y: -2.67, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -636,7 +636,7 @@ Transform:
   m_GameObject: {fileID: 282303578}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 26.94225, y: 0.579, z: -10}
+  m_LocalPosition: {x: 3.7304754, y: 0.579, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -933,7 +933,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 26.94225, y: 0.579, z: -10}
+  m_LocalPosition: {x: 3.7304754, y: 0.579, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7373,10 +7373,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b65fd987576efd149b3e6c57e2defe75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockbackDirection: {x: 7, y: 12}
+  knockbackDirection: {x: 10, y: 12}
   knockbackDuration: 0.07
-  attackCheck: {fileID: 1521636559}
-  attackCheckRadius: 1
   groundCheck: {fileID: 886360313}
   groundCheckDistance: 0.4
   wallCheck: {fileID: 843291344}
@@ -7384,9 +7382,13 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
+  attackCheck: {fileID: 1521636559}
+  attackCheckRadius: 1
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 64
+  stunDuration: 1
+  stunDirection: {x: 10, y: 12}
   moveSpeed: 1.5
   idleTime: 2
   battleTime: 7

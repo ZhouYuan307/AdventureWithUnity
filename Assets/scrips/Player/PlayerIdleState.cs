@@ -31,7 +31,7 @@ public class PlayerIdleState : PlayerGroundedState
         //    return;
         //}
 
-        if (xInput != 0 && !player.isBusy)//忙于攻击不能立刻转到move，防止攻击时平移
+        if (xInput != 0 && !player.isBusy)//忙于攻击不能立刻转到move，防止攻击时平移,同时导致了攻击结束后只能原地跳跃的bug
         {
             stateMachine.ChangeState(player.moveState);
         }
