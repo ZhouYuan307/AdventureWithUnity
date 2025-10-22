@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using UnityEngine;
 using static System.Math;
 
@@ -28,4 +29,8 @@ public class Enemy_SkeletonAnimationTriggers : MonoBehaviour
             }
         }
     }
+
+    private void OpenCounterWindow() => enemy.OpenCounterAttackWindow();
+
+    private void CloseCounterWindow() => enemy.CloseCounterAttackWindow();
 }

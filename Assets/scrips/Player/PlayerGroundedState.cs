@@ -22,10 +22,14 @@ public class PlayerGroundedState : PlayerState
     {
         base.Update();
 
+        if (Input.GetKeyDown(KeyCode.C)) 
+        {
+            stateMachine.ChangeState(player.counterAttackState);
+        }
+
         if (Input.GetKeyDown(KeyCode.J))
         {
             stateMachine.ChangeState(player.primaryAttackState);
-            //这个返回只能让子类base.update()函数返回，而不能使子类的update()返回
             return;
         }
 
