@@ -31,7 +31,7 @@ public class PlayerCounterAttackState : PlayerState
         {
             if (hit.GetComponent<Enemy>() != null)
             {
-                if (hit.GetComponent<Enemy>().CanBeStunned())
+                if (hit.GetComponent<Enemy>().TryToBeStunned())
                 {
                     stateTimer = 10; //big enough is ok,cause now it shouldn't exit
                     player.anim.SetBool("SuccessfullCounterAttack", true);

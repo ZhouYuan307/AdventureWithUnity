@@ -44,9 +44,9 @@ public class Enemy_Skeleton : Enemy
     }
 
     //actually, once it is true, the counter attack is finished successfully
-    public override bool CanBeStunned()
+    public override bool TryToBeStunned()
     {
-        if (base.CanBeStunned())
+        if (base.TryToBeStunned())
         {
             stateMachine.ChangeState(stunnedState);
             return true;

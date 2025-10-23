@@ -18,13 +18,16 @@ public class Player : Entity
     public float jumpForce;
 
     [Header("Dash info")]
-    [SerializeField] private float dashCooldown;
-    private float dashUsageTimer;
     public float dashSpeed;
     public float dashDuration;
     public float dashDir {  get; private set; }
 
-    
+    [Header("Slide tackle info")]
+    [SerializeField]private float slideTackleCoolDown;
+    private float slideTackleUsageTimer;
+    public float slideTackleSpeed;
+    public float slideTackleDuration;
+    public float slideTackleDir { get; private set; }
 
 
 
@@ -51,6 +54,8 @@ public class Player : Entity
     public PlayerPrimaryAttackState primaryAttackState { get; private set; }
 
     public PlayerCounterAttackState counterAttackState { get; private set; }
+
+    public PlayerSlideTackleState slideTackleState { get; private set; }
     #endregion
 
     protected override void Awake()
@@ -67,6 +72,7 @@ public class Player : Entity
         wallJumpState = new PlayerWallJumpState(this, stateMachine, "WallJump");
         primaryAttackState = new PlayerPrimaryAttackState(this, stateMachine, "Attack");
         counterAttackState = new PlayerCounterAttackState(this, stateMachine, "CounterAttack");
+        slideTackleState = new PlayerSlideTackleState(this, stateMachine, "SlideTackle");
 
     }
 
@@ -82,6 +88,7 @@ public class Player : Entity
         base.Update();
         stateMachine.currentState.Update();
         CheckForDashInput();
+        CheckForSlideTackleInput();
     }
 
     //使用StartCoroutine(name, agv)来调用
@@ -100,7 +107,7 @@ public class Player : Entity
 
     private void CheckForDashInput()
     {
-        dashUsageTimer -= Time.deltaTime;
+
 
 
         if (IsWallDetected())
@@ -109,9 +116,9 @@ public class Player : Entity
         }
 
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && dashUsageTimer < 0)
+        if (Input.GetKeyDown(KeyCode.V) && SkillManager.instance.dash.TryUseSkill())
         {
-            dashUsageTimer = dashCooldown;
+
             //GetAxisRaw:return -1,0,1
             dashDir = Input.GetAxisRaw("Horizontal");
             if (dashDir == 0)
@@ -119,6 +126,31 @@ public class Player : Entity
                 dashDir = facingDir;
             }
             stateMachine.ChangeState(dashState);
+        }
+    }
+
+    private void CheckForSlideTackleInput()
+    {
+
+        slideTackleUsageTimer -= Time.deltaTime;
+
+        if (IsWallDetected())
+        {
+            return;
+        }
+
+
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) && slideTackleUsageTimer < 0)
+        {
+            slideTackleUsageTimer = slideTackleCoolDown;
+            //GetAxisRaw:return -1,0,1
+            slideTackleDir = Input.GetAxisRaw("Horizontal");
+            if (slideTackleDir == 0)
+            {
+                slideTackleDir = facingDir;
+            }
+            stateMachine.ChangeState(slideTackleState);
         }
     }
 

@@ -49,7 +49,7 @@ public class Enemy : Entity
         counterImage.SetActive(false);
     }
 
-    public virtual bool CanBeStunned()
+    public virtual bool TryToBeStunned()
     {
         if (canBeStunned)
         {

@@ -27,6 +27,7 @@ public class PlayerJumpState : PlayerState
         if (rb.velocity.y < 0)
         {
             stateMachine.ChangeState(player.airState);
+            return;
         }
     }
 }
