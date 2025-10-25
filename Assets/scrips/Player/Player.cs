@@ -9,9 +9,7 @@ public class Player : Entity
     [Header("Attack details")]
     public Vector2[] attackMovement;
     public float counterAttackDuration = .2f;
-
-
-    public bool isBusy {  get; private set; }
+    public bool isBusy { get; private set; }
 
     [Header("Move info")]
     public float moveSpeed = 12f;
@@ -23,15 +21,14 @@ public class Player : Entity
     public float dashDir {  get; private set; }
 
     [Header("Slide tackle info")]
-    [SerializeField]private float slideTackleCoolDown;
-    private float slideTackleUsageTimer;
+    [SerializeField]public float slideTackleCoolDown;
     public float slideTackleSpeed;
     public float slideTackleDuration;
-    public float slideTackleDir { get; private set; }
 
 
 
 
+    public SkillManager skill {  get; private set; }
 
 
     #region States
@@ -80,6 +77,7 @@ public class Player : Entity
     {
 
         base.Start();
+        skill = SkillManager.instance;
         stateMachine.Initialize(idleState);
     }
 
@@ -88,7 +86,7 @@ public class Player : Entity
         base.Update();
         stateMachine.currentState.Update();
         CheckForDashInput();
-        CheckForSlideTackleInput();
+
     }
 
     //使用StartCoroutine(name, agv)来调用
@@ -116,7 +114,7 @@ public class Player : Entity
         }
 
 
-        if (Input.GetKeyDown(KeyCode.V) && SkillManager.instance.dash.TryUseSkill())
+        if (Input.GetKeyDown(KeyCode.LeftShift) && SkillManager.instance.dash.TryUseSkill())
         {
 
             //GetAxisRaw:return -1,0,1
@@ -129,29 +127,6 @@ public class Player : Entity
         }
     }
 
-    private void CheckForSlideTackleInput()
-    {
 
-        slideTackleUsageTimer -= Time.deltaTime;
-
-        if (IsWallDetected())
-        {
-            return;
-        }
-
-
-
-        if (Input.GetKeyDown(KeyCode.LeftShift) && slideTackleUsageTimer < 0)
-        {
-            slideTackleUsageTimer = slideTackleCoolDown;
-            //GetAxisRaw:return -1,0,1
-            slideTackleDir = Input.GetAxisRaw("Horizontal");
-            if (slideTackleDir == 0)
-            {
-                slideTackleDir = facingDir;
-            }
-            stateMachine.ChangeState(slideTackleState);
-        }
-    }
 
 }

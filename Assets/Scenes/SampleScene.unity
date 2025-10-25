@@ -388,7 +388,7 @@ MonoBehaviour:
   jumpForce: 12
   dashSpeed: 25
   dashDuration: 0.2
-  slideTackleCoolDown: 1
+  slideTackleCoolDown: 0
   slideTackleSpeed: 10
   slideTackleDuration: 0.8
 --- !u!4 &190927334
@@ -1109,6 +1109,67 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &776511018
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6721394556243285409, guid: 798a260aee08b8849a56f317ed485d06, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 6721394556243285409, guid: 798a260aee08b8849a56f317ed485d06, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 6721394556243285409, guid: 798a260aee08b8849a56f317ed485d06, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6721394556243285409, guid: 798a260aee08b8849a56f317ed485d06, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6721394556243285409, guid: 798a260aee08b8849a56f317ed485d06, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6721394556243285409, guid: 798a260aee08b8849a56f317ed485d06, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6721394556243285409, guid: 798a260aee08b8849a56f317ed485d06, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6721394556243285409, guid: 798a260aee08b8849a56f317ed485d06, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6721394556243285409, guid: 798a260aee08b8849a56f317ed485d06, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6721394556243285409, guid: 798a260aee08b8849a56f317ed485d06, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8304328956811449524, guid: 798a260aee08b8849a56f317ed485d06, type: 3}
+      propertyPath: m_Name
+      value: Clone
+      objectReference: {fileID: 0}
+    - target: {fileID: 8304328956811449524, guid: 798a260aee08b8849a56f317ed485d06, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 798a260aee08b8849a56f317ed485d06, type: 3}
 --- !u!1 &843291343
 GameObject:
   m_ObjectHideFlags: 0
@@ -1151,6 +1212,7 @@ GameObject:
   - component: {fileID: 877414113}
   - component: {fileID: 877414112}
   - component: {fileID: 877414114}
+  - component: {fileID: 877414115}
   m_Layer: 0
   m_Name: SkillManager
   m_TagString: Untagged
@@ -1198,6 +1260,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 1
+--- !u!114 &877414115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 877414111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d6c951107731a2498b631c56c5637ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 0
+  clonePrefab: {fileID: 8304328956811449524, guid: 798a260aee08b8849a56f317ed485d06, type: 3}
+  cloneDuration: 1.5
+  canAttack: 1
 --- !u!1 &886360312
 GameObject:
   m_ObjectHideFlags: 0
@@ -10068,6 +10146,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 532514740}
+  - {fileID: 776511018}
   - {fileID: 190927334}
   - {fileID: 1637139364}
   - {fileID: 175785953}

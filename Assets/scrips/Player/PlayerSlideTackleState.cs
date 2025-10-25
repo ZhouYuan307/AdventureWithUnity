@@ -29,7 +29,8 @@ public class PlayerSlideTackleState : PlayerState
             stateMachine.ChangeState(player.jumpState);
             return;
         }
-        player.SetVelocity(player.slideTackleSpeed * player.slideTackleDir, 0);
+
+        player.SetVelocity(player.slideTackleSpeed * player.facingDir, 0);
         if (stateTimer < 0)
         {
             stateMachine.ChangeState(player.idleState);

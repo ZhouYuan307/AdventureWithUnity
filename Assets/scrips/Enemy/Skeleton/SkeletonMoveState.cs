@@ -22,6 +22,8 @@ public override void Enter()
     public override void Update()
     {
         base.Update();
+
+
         enemy.SetVelocity(enemy.moveSpeed * enemy.facingDir, rb.velocity.y);
         if (enemy.IsWallDetected() || !enemy.IsGroundedDetected())
         {
@@ -29,4 +31,5 @@ public override void Enter()
             stateMachine.ChangeState(enemy.idleState);
         }
     }
+
 }
