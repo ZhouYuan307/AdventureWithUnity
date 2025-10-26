@@ -53,6 +53,10 @@ public class Player : Entity
     public PlayerCounterAttackState counterAttackState { get; private set; }
 
     public PlayerSlideTackleState slideTackleState { get; private set; }
+
+    public PlayerCatchSwordState catchSwordState { get; private set; }
+
+    public PlayerAimSwordState aimSwordState { get; private set; }
     #endregion
 
     protected override void Awake()
@@ -67,9 +71,13 @@ public class Player : Entity
         dashState = new PlayerDashState(this, stateMachine, "Dash");
         wallSlideState = new PlayerWallSlideState(this, stateMachine, "WallSlide");
         wallJumpState = new PlayerWallJumpState(this, stateMachine, "WallJump");
+        slideTackleState = new PlayerSlideTackleState(this, stateMachine, "SlideTackle");
+
         primaryAttackState = new PlayerPrimaryAttackState(this, stateMachine, "Attack");
         counterAttackState = new PlayerCounterAttackState(this, stateMachine, "CounterAttack");
-        slideTackleState = new PlayerSlideTackleState(this, stateMachine, "SlideTackle");
+
+        aimSwordState = new PlayerAimSwordState(this, stateMachine, "AimSword");
+        catchSwordState = new PlayerCatchSwordState(this, stateMachine, "CatchSword");
 
     }
 

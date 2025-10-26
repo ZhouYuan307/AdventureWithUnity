@@ -21,13 +21,19 @@ public class PlayerGroundedState : PlayerState
     public override void Update()
     {
         base.Update();
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            stateMachine.ChangeState(player.aimSwordState);
+            return;
+        }
 
         if (Input.GetKeyDown(KeyCode.C)) 
         {
             stateMachine.ChangeState(player.counterAttackState);
+            return;
         }
 
-        if (Input.GetKeyDown(KeyCode.J))
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             stateMachine.ChangeState(player.primaryAttackState);
             return;
@@ -36,10 +42,12 @@ public class PlayerGroundedState : PlayerState
         if (!player.IsGroundedDetected()) 
         {
             stateMachine.ChangeState(player.airState);
+            return;
         }
 
-        if (Input.GetKeyDown(KeyCode.K) && player.IsGroundedDetected()) { 
+        if (Input.GetKeyDown(KeyCode.Space) && player.IsGroundedDetected()) { 
             stateMachine.ChangeState(player.jumpState);
+            return;
         }
 
     }

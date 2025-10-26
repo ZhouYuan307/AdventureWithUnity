@@ -36,11 +36,6 @@ public class Enemy_Skeleton : Enemy
     protected override void Update()
     {
         base.Update();
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            stateMachine.ChangeState(stunnedState);
-        }
-
     }
 
     //actually, once it is true, the counter attack is finished successfully

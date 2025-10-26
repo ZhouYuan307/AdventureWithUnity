@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 6721394556243285409}
   - component: {fileID: 5522377357014223078}
   - component: {fileID: 7807072991402907314}
-  - component: {fileID: 1714293587703753783}
+  - component: {fileID: 6350615003765983626}
   m_Layer: 0
   m_Name: Clone
   m_TagString: Untagged
@@ -139,7 +139,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1714293587703753783
+--- !u!114 &6350615003765983626
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -151,6 +151,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afb03cda17b2d734a93a4e0ab4ea15dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorFadeSpeed: 1
+  colorFadeSpeed: 1.5
   attackCheck: {fileID: 2148312660388994196}
   attackCheckRadius: 0.8

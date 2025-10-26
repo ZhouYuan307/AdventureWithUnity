@@ -24,7 +24,7 @@ public class PlayerSlideTackleState : PlayerState
     public override void Update()
     {
         base.Update();
-        if (Input.GetKeyDown(KeyCode.K) && player.IsGroundedDetected())
+        if (Input.GetKeyDown(KeyCode.Space) && player.IsGroundedDetected())
         {
             stateMachine.ChangeState(player.jumpState);
             return;
@@ -34,6 +34,7 @@ public class PlayerSlideTackleState : PlayerState
         if (stateTimer < 0)
         {
             stateMachine.ChangeState(player.idleState);
+            return;
         }
     }
 }
