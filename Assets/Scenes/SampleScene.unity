@@ -417,6 +417,7 @@ MonoBehaviour:
   counterAttackDuration: 0.2
   moveSpeed: 7
   jumpForce: 12
+  swordReturnImpact: 3.5
   dashSpeed: 25
   dashDuration: 0.2
   slideTackleCoolDown: 0
