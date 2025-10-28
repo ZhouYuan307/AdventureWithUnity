@@ -21,7 +21,7 @@ public class PlayerGroundedState : PlayerState
     public override void Update()
     {
         base.Update();
-        if (Input.GetKeyDown(KeyCode.Mouse1))
+        if (Input.GetKeyDown(KeyCode.Mouse1) && HasNoSword())
         {
             stateMachine.ChangeState(player.aimSwordState);
             return;
@@ -50,5 +50,14 @@ public class PlayerGroundedState : PlayerState
             return;
         }
 
+    }
+    private bool HasNoSword()
+    {
+        if (!player.sword)
+        {
+            return true;
+        }
+        player.sword.GetComponent<SwordSkillController>().ReturnSword();
+        return false;
     }
 }
