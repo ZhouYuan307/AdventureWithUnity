@@ -19,6 +19,7 @@ public class SwordSkill : Skill
     [Header("Bounce info")]
     [SerializeField] private int bounceAmount;
     [SerializeField] private float bounceGravity;
+    [SerializeField] private float bounceSpeed;
 
     [Header("Pierce info")]
     [SerializeField] private int pierceAmount;
@@ -34,6 +35,7 @@ public class SwordSkill : Skill
     [SerializeField] private GameObject swordPrefab;
     [SerializeField] private Vector2 launchForce;
     [SerializeField] private float swordGravity;
+    [SerializeField] private float returnSpeed;
 
 
 
@@ -94,7 +96,7 @@ public class SwordSkill : Skill
         switch (swordType)
         {
             case SwordType.Bounce:
-                newSwordScript.SetupBounce(true, bounceAmount);
+                newSwordScript.SetupBounce(true, bounceAmount, bounceSpeed);
                 break;
             case SwordType.Pierce:
                 newSwordScript.SetupPierce(pierceAmount);
@@ -104,7 +106,7 @@ public class SwordSkill : Skill
                 break;
         }
 
-        newSwordScript.SetupSword(finalDir, swordGravity, player);
+        newSwordScript.SetupSword(finalDir, swordGravity, player, returnSpeed);
 
         player.AssignNewSword(newSword);
         //when the player exit aimstate, then call DotsActive(false), instead call here
