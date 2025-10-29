@@ -24,6 +24,11 @@ public class SwordSkill : Skill
     [SerializeField] private int pierceAmount;
     [SerializeField] private float pierceGravity;
 
+    [Header("Spin info")]
+    [SerializeField] private float hitCooldown = .35f;
+    [SerializeField] private float maxTravelDistance = 7;
+    [SerializeField] private float spinDuration = 2;
+    [SerializeField] private float spinGravity = 1;
 
     [Header("Sword skill info")]
     [SerializeField] private GameObject swordPrefab;
@@ -51,11 +56,17 @@ public class SwordSkill : Skill
 
     private void SetupGravity()
     {
-        if (swordType == SwordType.Bounce)
+        switch (swordType)
         {
-            swordGravity = bounceGravity;
-        }else if (swordType == SwordType.Pierce){
-            swordGravity = pierceGravity;
+            case SwordType.Bounce:
+                swordGravity = bounceGravity;
+                break;
+            case SwordType.Pierce:
+                swordGravity = pierceGravity;
+                break;
+            case SwordType.Spin:
+                swordGravity = spinGravity;
+                break;
         }
     }
 
@@ -80,17 +91,20 @@ public class SwordSkill : Skill
         GameObject newSword = Instantiate(swordPrefab,player.transform.position, transform.rotation);
         SwordSkillController newSwordScript = newSword.GetComponent<SwordSkillController>();
 
-        if (swordType == SwordType.Bounce)
+        switch (swordType)
         {
-            newSwordScript.SetupBounce(true, bounceAmount);
-        }
-        else if (swordType == SwordType.Pierce)
-        {
-            newSwordScript.SetupPierce(pierceAmount);
+            case SwordType.Bounce:
+                newSwordScript.SetupBounce(true, bounceAmount);
+                break;
+            case SwordType.Pierce:
+                newSwordScript.SetupPierce(pierceAmount);
+                break;
+            case SwordType.Spin:
+                newSwordScript.SetupSpin(true, maxTravelDistance, spinDuration, hitCooldown);
+                break;
         }
 
-
-            newSwordScript.SetupSword(finalDir, swordGravity, player);
+        newSwordScript.SetupSword(finalDir, swordGravity, player);
 
         player.AssignNewSword(newSword);
         //when the player exit aimstate, then call DotsActive(false), instead call here
