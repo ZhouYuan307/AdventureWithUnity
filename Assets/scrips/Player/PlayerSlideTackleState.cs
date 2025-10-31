@@ -30,7 +30,7 @@ public class PlayerSlideTackleState : PlayerState
             return;
         }
 
-        player.SetVelocity(player.slideTackleSpeed * player.facingDir, 0);
+        player.SetVelocity(player.slideTackleSpeed * player.facingDir, rb.velocity.y);
         if (stateTimer < 0)
         {
             stateMachine.ChangeState(player.idleState);

@@ -114,10 +114,6 @@ public class Player : Entity
         Destroy(sword);
     }
 
-    public void ExitBlackHoleAblity()
-    {
-        stateMachine.ChangeState(airState);
-    }
 
     //使用StartCoroutine(name, agv)来调用
     public IEnumerator BusyFor(float _seconds)

@@ -1,1 +1,2 @@
-1.Add PlayerSlideTackleState
+【名称】滑铲状态
+【描述】move状态下按ctrl可以进行滑铲

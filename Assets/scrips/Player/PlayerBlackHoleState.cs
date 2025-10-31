@@ -55,6 +55,9 @@ public class PlayerBlackHoleState : PlayerState
             }
         }
 
-        //we exit this state in black hole skills controller
+        if (player.skill.blackhole.SkillCompleted())
+        {
+            stateMachine.ChangeState(player.airState);
+        }
     }
 }
