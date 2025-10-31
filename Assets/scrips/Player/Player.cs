@@ -60,6 +60,8 @@ public class Player : Entity
     public PlayerCatchSwordState catchSwordState { get; private set; }
 
     public PlayerAimSwordState aimSwordState { get; private set; }
+
+    public PlayerBlackHoleState blackHoleState { get; private set; }
     #endregion
 
     protected override void Awake()
@@ -81,6 +83,7 @@ public class Player : Entity
 
         aimSwordState = new PlayerAimSwordState(this, stateMachine, "AimSword");
         catchSwordState = new PlayerCatchSwordState(this, stateMachine, "CatchSword");
+        blackHoleState = new PlayerBlackHoleState(this, stateMachine, "Jump");
 
     }
 
@@ -109,6 +112,11 @@ public class Player : Entity
     {
         stateMachine.ChangeState(catchSwordState);
         Destroy(sword);
+    }
+
+    public void ExitBlackHoleAblity()
+    {
+        stateMachine.ChangeState(airState);
     }
 
     //使用StartCoroutine(name, agv)来调用
