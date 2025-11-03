@@ -582,7 +582,7 @@ Transform:
   m_GameObject: {fileID: 190927332}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -17.43, y: -0.64, z: 0}
+  m_LocalPosition: {x: -15.42, y: -0.654, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -983,7 +983,7 @@ Transform:
   m_GameObject: {fileID: 282303578}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -21.729588, y: 3.8131018, z: -10.05731}
+  m_LocalPosition: {x: -18.49989, y: 4.61, z: -10.05731}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1342,7 +1342,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -21.729588, y: 3.8131018, z: -10.05731}
+  m_LocalPosition: {x: -18.49989, y: 4.61, z: -10.05731}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2088,6 +2088,13 @@ MonoBehaviour:
   canExplode: 1
   canMoveToEnemy: 1
   moveSpeed: 6
+  canUseMultiStacks: 1
+  amountOfStacks: 3
+  multiStakeCooldown: 4
+  crystalList:
+  - {fileID: 7128122694007341, guid: 6ad8347cf6d80024f9bdae1ae87727fa, type: 3}
+  - {fileID: 7128122694007341, guid: 6ad8347cf6d80024f9bdae1ae87727fa, type: 3}
+  - {fileID: 7128122694007341, guid: 6ad8347cf6d80024f9bdae1ae87727fa, type: 3}
 --- !u!1 &886360312
 GameObject:
   m_ObjectHideFlags: 0
