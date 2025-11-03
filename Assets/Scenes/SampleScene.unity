@@ -2085,6 +2085,9 @@ MonoBehaviour:
   cooldown: 0
   crystalDuration: 1.5
   crystalPrefab: {fileID: 7128122694007341, guid: 6ad8347cf6d80024f9bdae1ae87727fa, type: 3}
+  canExplode: 1
+  canMoveToEnemy: 0
+  moveSpeed: 0
 --- !u!1 &886360312
 GameObject:
   m_ObjectHideFlags: 0
