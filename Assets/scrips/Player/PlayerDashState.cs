@@ -11,13 +11,14 @@ public class PlayerDashState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        player.skill.clone.CreateClone(player.transform, new Vector3(0,0,0));
+        player.skill.clone.CreateCloneOnDashStart();
         stateTimer = player.dashDuration;
     }
 
     public override void Exit()
     {
         player.SetVelocity(0, rb.velocity.y);
+        //player.skill.clone.CreateCloneOnDashOver();
         base.Exit();
     }
 

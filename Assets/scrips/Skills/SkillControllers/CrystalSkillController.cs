@@ -37,7 +37,7 @@ public class CrystalSkillController : SkillController
             crystalCompleted();
         }
 
-        if (canMove)
+        if (canMove && closestTarget != null)
         {
             transform.position = Vector2.MoveTowards(transform.position, closestTarget.position, moveSpeed * Time.deltaTime);
 
