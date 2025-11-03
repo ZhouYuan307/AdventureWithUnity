@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static System.Math;
 
-public class CrystalSkillController : MonoBehaviour
+public class CrystalSkillController : SkillController
 {
     private float hitDir;
     private Animator anim => GetComponent<Animator>();
@@ -17,12 +17,15 @@ public class CrystalSkillController : MonoBehaviour
 
     private bool canGrow;
     private float growSpeed = 5;
+
+    private Transform closestTarget;
     public void SetupCrystal(float _crystalDuration, bool _canExplode, bool _canMove, float _moveSpeed)
     {
         crystalExistTimer = _crystalDuration;
         canExplode = _canExplode;
         canMove = _canMove;
         moveSpeed = _moveSpeed;
+        closestTarget = FindClosestEnemy(transform);
     }
 
     private void Update()
@@ -33,6 +36,18 @@ public class CrystalSkillController : MonoBehaviour
         {
             crystalCompleted();
         }
+
+        if (canMove)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, closestTarget.position, moveSpeed * Time.deltaTime);
+
+            if (Vector2.Distance(transform.position, closestTarget.position) < 1)
+            {
+                crystalCompleted();
+                canMove = false;
+            }
+        }
+
         if (canGrow)
         {
             transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(3, 3), growSpeed * Time.deltaTime);

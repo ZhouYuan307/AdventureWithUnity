@@ -4,7 +4,7 @@ using Unity.Burst.CompilerServices;
 using UnityEngine;
 using static System.Math;
 
-public class SwordSkillController : MonoBehaviour
+public class SwordSkillController : SkillController
 {
     private Animator anim;
     private Rigidbody2D rb;

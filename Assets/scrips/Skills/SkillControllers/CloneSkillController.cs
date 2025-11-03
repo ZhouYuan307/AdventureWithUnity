@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static System.Math;
 
-public class CloneSkillController : MonoBehaviour
+public class CloneSkillController : SkillController
 {
     private float hitDir;
 
@@ -44,6 +44,8 @@ public class CloneSkillController : MonoBehaviour
         transform.position = _newTransform.position + _offset;
         cloneTimer = _cloneDuration;
 
+        closestEnemy = FindClosestEnemy(transform);
+
         FaceClosestTarget();
     }
 
@@ -69,23 +71,9 @@ public class CloneSkillController : MonoBehaviour
 
     private void FaceClosestTarget()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 25);
-        float closestDistance = Mathf.Infinity;
-        foreach (var hit in colliders)
-        {
-            if (hit.GetComponent<Enemy>() != null)
-            {
-                float diatanceToEnemy = Vector2.Distance(transform.position, hit.transform.position);
-                if (diatanceToEnemy < closestDistance)
-                {
-                    closestDistance = diatanceToEnemy;
-                    closestEnemy = hit.transform;
-                }
-            }
-        }
-
         if (closestEnemy != null)
         {
+
             if (transform.position.x > closestEnemy.position.x)
             {
                 transform.Rotate(0, 180, 0);

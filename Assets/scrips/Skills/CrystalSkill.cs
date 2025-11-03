@@ -28,6 +28,11 @@ public class CrystalSkill : Skill
         }
         else
         {
+            if (canMoveToEnemy)
+            {
+                return;
+            }
+
             Vector2 playerPos = player.transform.position;
             player.transform.position = currentCrystal.transform.position;
             currentCrystal.transform.position = playerPos;
