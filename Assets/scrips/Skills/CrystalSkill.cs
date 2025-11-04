@@ -36,10 +36,7 @@ public class CrystalSkill : Skill
 
         if (currentCrystal == null)
         {
-            currentCrystal = Instantiate(crystalPrefab, player.transform.position, Quaternion.identity);
-            CrystalSkillController currentCrystalScript = currentCrystal.GetComponent<CrystalSkillController>();
-
-            currentCrystalScript.SetupCrystal(crystalDuration, canExplode, canMoveToEnemy, moveSpeed);
+            CreateCrystal();
         }
         else
         {
@@ -54,7 +51,7 @@ public class CrystalSkill : Skill
 
             if (cloneInsteadOfCrystal)
             {
-                SkillManager.instance.clone.CreateClone(currentCrystal.transform, Vector3.zero);
+                SkillManager.instance.clone.CreateClone(currentCrystal.transform, Vector3.zero, false);
                 Destroy(currentCrystal);
             }
             else
@@ -64,7 +61,13 @@ public class CrystalSkill : Skill
         }
     }
 
+    public void CreateCrystal()
+    {
+        currentCrystal = Instantiate(crystalPrefab, player.transform.position, Quaternion.identity);
+        CrystalSkillController currentCrystalScript = currentCrystal.GetComponent<CrystalSkillController>();
 
+        currentCrystalScript.SetupCrystal(crystalDuration, canExplode, canMoveToEnemy, moveSpeed);
+    }
 
     private bool TryUseMultiCrystal()
     {

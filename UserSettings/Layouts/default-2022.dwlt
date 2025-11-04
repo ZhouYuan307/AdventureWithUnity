@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Inspector
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 117
+  controlID: 143
   draggingID: 0
 --- !u!114 &6
 MonoBehaviour:
@@ -368,9 +368,9 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: 0c700000
-    m_LastClickedID: 28684
-    m_ExpandedIDs: 000000005e6e0000bc6f000000ca9a3bffffff7f
+    m_SelectedIDs: d46f0000
+    m_LastClickedID: 28628
+    m_ExpandedIDs: 00000000866e0000966f000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -398,7 +398,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000005e6e0000
+    m_ExpandedIDs: 00000000866e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -423,8 +423,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 7c6a0000
-    m_LastClickedInstanceID: 27260
+    m_SelectedInstanceIDs: 866a0000
+    m_LastClickedInstanceID: 27270
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: a06300001a620000dc610000e4610000e2610000ee610000f2610000247c0000d6620000e8620000ec62000004630000146300008c6a0000c06d0000086e0000c26d000000000000146e0000f46a00001e6b00001a6b0000387d0000146b0000f26f0000
     m_RenameOverlay:
@@ -823,9 +823,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -16.873919, y: -0.93287486, z: -0.030945467}
+    m_Target: {x: -9.725329, y: -3.6693232, z: -0.039912134}
     speed: 2
-    m_Value: {x: -16.873919, y: -0.93287486, z: -0.030945467}
+    m_Value: {x: -9.725329, y: -3.6693232, z: -0.039912134}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -875,9 +875,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 3.424994
+    m_Target: 4.3216553
     speed: 2
-    m_Value: 3.424994
+    m_Value: 4.3216553
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -1209,7 +1209,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 27260
+  m_LastSelectedObjectID: 27270
 --- !u!114 &18
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1247,8 +1247,8 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 7c6a0000
-      m_LastClickedID: 27260
+      m_SelectedIDs: 866a0000
+      m_LastClickedID: 27270
       m_ExpandedIDs: fcfaffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0

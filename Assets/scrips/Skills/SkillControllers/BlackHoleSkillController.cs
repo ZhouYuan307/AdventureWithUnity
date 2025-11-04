@@ -116,7 +116,7 @@ public class BlackHoleSkillController : SkillController
             float xOffset;
 
             xOffset = (Random.Range(0, 100) > 50) ? 2 : -2;
-            SkillManager.instance.clone.CreateClone(targets[randomIndex], new Vector3(xOffset, 0, 0));
+            SkillManager.instance.clone.CreateClone(targets[randomIndex], new Vector3(xOffset, 0, 0),false);
 
             amountOfAttacks--;
 
