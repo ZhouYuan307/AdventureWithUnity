@@ -23,6 +23,7 @@ public class PlayerAnimationTriggers : MonoBehaviour
                 hitDir = Sign(hit.GetComponent<Enemy>().rb.position.x - player.rb.position.x);
 
                 hit.GetComponent<Enemy>().Damage(hitDir);
+                hit.GetComponent<CharacterStats>().TakeDamage(player.stats.damage.GetValue());
             }
         }
     }
