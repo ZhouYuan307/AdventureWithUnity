@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
+using static System.Math;
 
 public class Entity : MonoBehaviour
 {
@@ -14,6 +16,9 @@ public class Entity : MonoBehaviour
     public SpriteRenderer sr { get; private set; }
 
     public CharacterStats stats { get; private set; }
+
+    public CapsuleCollider2D cd {get; private set; }
+    
     #endregion
     [Header("Knockback info")]
     [SerializeField] protected Vector2 knockbackDirection;
@@ -46,6 +51,7 @@ public class Entity : MonoBehaviour
         fx = GetComponent<EntityFX>();
         rb = GetComponent<Rigidbody2D>();
         stats = GetComponent<CharacterStats>();
+        cd = GetComponent<CapsuleCollider2D>();
     }
 
     protected virtual void Update()
@@ -53,8 +59,9 @@ public class Entity : MonoBehaviour
 
     }
 
-    public virtual void Damage(float hitDir)
+    public virtual void DamageFX(Vector2 positionOfHitter)
     {
+        float hitDir = Sign(rb.position.x - positionOfHitter.x);
         fx.StartCoroutine("FlashFX");
         StartCoroutine("HitKnockback", hitDir);
     }
@@ -133,5 +140,10 @@ public class Entity : MonoBehaviour
         {
             sr.color = Color.white;
         }
+    }
+
+    public virtual void Die()
+    {
+
     }
 }

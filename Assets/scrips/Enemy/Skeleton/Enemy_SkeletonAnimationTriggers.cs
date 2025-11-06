@@ -22,10 +22,9 @@ public class Enemy_SkeletonAnimationTriggers : MonoBehaviour
         {
             if (hit.GetComponent<Player>() != null)
             {
-
-                hitDir = Sign(hit.GetComponent<Player>().rb.position.x - enemy.rb.position.x);
-
-                hit.GetComponent<Player>().Damage(hitDir);
+                PlayerStats target = hit.GetComponent<PlayerStats>();
+                enemy.stats.DoDamage(target);
+                hit.GetComponent<Player>().DamageFX(enemy.rb.position);
             }
         }
     }

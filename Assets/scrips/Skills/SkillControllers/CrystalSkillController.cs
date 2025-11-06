@@ -61,9 +61,7 @@ public class CrystalSkillController : SkillController
         {
             if (hit.GetComponent<Enemy>() != null)
             {
-                hitDir = Sign(hit.GetComponent<Enemy>().rb.position.x - transform.position.x);
-
-                hit.GetComponent<Enemy>().Damage(hitDir);
+                hit.GetComponent<Enemy>().DamageFX(transform.position);
             }
         }
     }

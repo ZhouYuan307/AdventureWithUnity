@@ -210,8 +210,7 @@ public class SwordSkillController : SkillController
     
     private void SwordSkillDamage(Enemy enemy)
     {
-        float hitDir = Sign(enemy.transform.position.x - transform.position.x);
-        enemy.Damage(hitDir);
+        enemy.DamageFX(transform.position);
         //enemy.StartCoroutine("FreezeTimeFor", .7f);
     }
 
