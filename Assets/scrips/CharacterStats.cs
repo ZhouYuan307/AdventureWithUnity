@@ -1,13 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.IO.LowLevel.Unsafe;
+using System.Xml.Schema;
 using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
-    public Stat strength;
-    public Stat damage;
+    [Header("Major stats")]
+    public Stat strength; //increase damage
+    public Stat agility; //increase evasion
+    public Stat intelligence; //increase magic damage and magic resistance
+    public Stat vitality; //increase health
+
+    [Header("Defensive stats")]
     public Stat maxHealth;
+    public Stat armor;
+    public Stat evasion;
+
+
+    public Stat damage;
 
 
     [SerializeField]private int currentHealth;
@@ -21,8 +29,47 @@ public class CharacterStats : MonoBehaviour
 
     public virtual void DoDamage(CharacterStats _targetStats)
     {
+
+        //apply evasion
+        if (TryAvoidAttack(_targetStats))
+        {
+            return;
+        }
+
+        //apply strength
         int totalDamage = damage.GetValue() + strength.GetValue();
+
+        //apply armor
+        totalDamage = ApplyArmorReduction(_targetStats, totalDamage);
+
         _targetStats.TakeDamage(totalDamage);
+    }
+
+    private int ApplyArmorReduction(CharacterStats _targetStats, int totalDamage)
+    {
+        int armor = _targetStats.armor.GetValue();
+        int leastDamage = (int)(((float)totalDamage) * 0.05f);
+        if (totalDamage >= (armor + leastDamage))
+        {
+            totalDamage -= armor;
+        }
+        else
+        {
+            totalDamage = leastDamage;
+        }
+
+        return totalDamage;
+    }
+
+    private static bool TryAvoidAttack(CharacterStats _targetStats)
+    {
+        int totalEvasion = _targetStats.evasion.GetValue() + _targetStats.agility.GetValue();
+        if (Random.Range(0, 100) < totalEvasion)
+        {
+            Debug.Log("Miss");
+            return true;
+        }
+        return false;
     }
 
     public virtual void TakeDamage(int _damage)
