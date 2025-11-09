@@ -22,6 +22,12 @@ public class PlayerAnimationTriggers : MonoBehaviour
             {
                 EnemyStats  _target = hit.GetComponent<EnemyStats>();
                 player.stats.DoDamage(_target);
+                if (_target.GetMissState())
+                {
+                    _target.SetMissState(false);
+                    //do miss animation
+                    return;
+                }
                 hit.GetComponent<Enemy>().DamageFX(player.rb.position);
                 
             }

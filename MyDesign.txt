@@ -1,2 +1,7 @@
 【名称】滑铲状态
 【描述】move状态下按ctrl可以进行滑铲
+【状态】已实现
+
+【名称】技能伤害动画数值统一管理
+【描述】在skillController中实现函数protected virtual void AttackEnemy
+【状态】未实现

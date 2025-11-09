@@ -9,13 +9,17 @@ public class CharacterStats : MonoBehaviour
     public Stat intelligence; //increase magic damage and magic resistance
     public Stat vitality; //increase health
 
+    [Header("Offensive stats")]
+    public Stat damage;
+    public Stat critChance;
+    public Stat critPower;  //50% by default
+
+
     [Header("Defensive stats")]
     public Stat maxHealth;
     public Stat armor;
     public Stat evasion;
-
-
-    public Stat damage;
+    private bool isMiss;
 
 
     [SerializeField]private int currentHealth;
@@ -25,6 +29,8 @@ public class CharacterStats : MonoBehaviour
     protected virtual void Start()
     {
         currentHealth = maxHealth.GetValue();
+        critPower.SetDefaultValue(150);
+        isMiss = false;
     }
 
     public virtual void DoDamage(CharacterStats _targetStats)
@@ -38,6 +44,12 @@ public class CharacterStats : MonoBehaviour
 
         //apply strength
         int totalDamage = damage.GetValue() + strength.GetValue();
+
+        //check crit
+        if (CanCrit())
+        {
+            totalDamage = CalculateCriticalDamage(totalDamage);
+        }
 
         //apply armor
         totalDamage = ApplyArmorReduction(_targetStats, totalDamage);
@@ -67,6 +79,7 @@ public class CharacterStats : MonoBehaviour
         if (Random.Range(0, 100) < totalEvasion)
         {
             Debug.Log("Miss");
+            _targetStats.SetMissState(true);
             return true;
         }
         return false;
@@ -75,7 +88,6 @@ public class CharacterStats : MonoBehaviour
     public virtual void TakeDamage(int _damage)
     {
         currentHealth -= _damage;
-        Debug.Log(_damage);
 
         if (currentHealth < 0)
         {
@@ -87,4 +99,30 @@ public class CharacterStats : MonoBehaviour
     {
 
     }
+
+    private bool CanCrit()
+    {
+        int totalCriticalChance = critChance.GetValue() + agility.GetValue();
+
+        if (Random.Range(0,100) <= totalCriticalChance)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private int CalculateCriticalDamage(int _damage)
+    {
+        float totalCritPower = (critPower.GetValue() + strength.GetValue()) * 0.01f;
+        float critDamage = _damage * totalCritPower;
+        return Mathf.RoundToInt(critDamage);
+    }
+
+    public void SetMissState(bool _isMiss)
+    {
+        isMiss = _isMiss;
+        return;
+    }
+
+    public bool GetMissState() { return isMiss; }
 }

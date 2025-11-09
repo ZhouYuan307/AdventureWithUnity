@@ -22,8 +22,14 @@ public class Enemy_SkeletonAnimationTriggers : MonoBehaviour
         {
             if (hit.GetComponent<Player>() != null)
             {
-                PlayerStats target = hit.GetComponent<PlayerStats>();
-                enemy.stats.DoDamage(target);
+                PlayerStats _target = hit.GetComponent<PlayerStats>();
+                enemy.stats.DoDamage(_target);
+                if (_target.GetMissState())
+                {
+                    _target.SetMissState(false);
+                    //do miss animation
+                    return;
+                }
                 hit.GetComponent<Player>().DamageFX(enemy.rb.position);
             }
         }

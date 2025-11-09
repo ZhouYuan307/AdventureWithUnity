@@ -28,4 +28,9 @@ public class SkillController : MonoBehaviour
         }
         return closestEnemy;
     }
+
+    protected virtual void AttackEnemy(Enemy _enemyTarget, Transform _hitterTransform) 
+    { 
+        //do damage
+    }
 }
