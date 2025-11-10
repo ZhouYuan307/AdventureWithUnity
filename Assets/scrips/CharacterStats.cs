@@ -20,6 +20,16 @@ public class CharacterStats : MonoBehaviour
     public Stat armor;
     public Stat evasion;
     private bool isMiss;
+    public Stat magicResistance;
+
+    [Header("Magic stats")]
+    public Stat fireDamage;
+    public Stat iceDamage;
+    public Stat lightningDamage;
+
+    public bool isIgnited;
+    public bool isChilled;
+    public bool isShocked;
 
 
     [SerializeField]private int currentHealth;
@@ -42,6 +52,12 @@ public class CharacterStats : MonoBehaviour
             return;
         }
 
+        //DoPhysicalDamage(_targetStats);
+        //DoMagicalDamage(_targetStats);
+    }
+
+    private void DoPhysicalDamage(CharacterStats _targetStats)
+    {
         //apply strength
         int totalDamage = damage.GetValue() + strength.GetValue();
 
@@ -55,6 +71,19 @@ public class CharacterStats : MonoBehaviour
         totalDamage = ApplyArmorReduction(_targetStats, totalDamage);
 
         _targetStats.TakeDamage(totalDamage);
+    }
+    public virtual void DoMagicalDamage(CharacterStats _targetStats)
+    {
+        int _fireDamage = fireDamage.GetValue();
+        int _iceDamage = iceDamage.GetValue();
+        int _lightningDamage = lightningDamage.GetValue();
+
+        int totalMagicDamage = _fireDamage + _iceDamage + _lightningDamage + intelligence.GetValue();
+        totalMagicDamage = (totalMagicDamage - (_targetStats.intelligence.GetValue()*3));
+        totalMagicDamage = Mathf.Clamp(totalMagicDamage, 0, int.MaxValue);
+        //apply magic resistance
+        totalMagicDamage = Mathf.RoundToInt((float)totalMagicDamage * (1 - 0.01f * _targetStats.magicResistance.GetValue()));
+        _targetStats.TakeDamage(totalMagicDamage);
     }
 
     private int ApplyArmorReduction(CharacterStats _targetStats, int totalDamage)
@@ -85,6 +114,20 @@ public class CharacterStats : MonoBehaviour
         return false;
     }
 
+
+    public void ApplyAilments(bool _ignite, bool _chill, bool _shock)
+    {
+
+        if (isIgnited || isChilled || isShocked)
+        {
+            //apply ailments only if target dont have any ailments
+            return;
+        }
+
+        isIgnited = _ignite;
+        isChilled = _chill;
+        isShocked = _shock;
+    }
     public virtual void TakeDamage(int _damage)
     {
         currentHealth -= _damage;
