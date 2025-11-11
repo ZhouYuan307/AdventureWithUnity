@@ -27,9 +27,17 @@ public class CharacterStats : MonoBehaviour
     public Stat iceDamage;
     public Stat lightningDamage;
 
-    public bool isIgnited;
-    public bool isChilled;
-    public bool isShocked;
+    public bool isIgnited;  //do damage over time
+    public bool isChilled;  //reduce armor by 20%
+    public bool isShocked;  //reduce accuracy by 20%
+
+    private float ignitedTimer;
+    private float chilledTimer;
+    private float shockedTimer;
+
+    private float igniteDamageCooldown = .5f;
+    private float igniteDamageTimer;
+    private int igniteDamage;
 
 
     [SerializeField]private int currentHealth;
@@ -43,6 +51,39 @@ public class CharacterStats : MonoBehaviour
         isMiss = false;
     }
 
+    protected virtual void Update()
+    {
+        ignitedTimer -= Time.deltaTime;
+        chilledTimer -= Time.deltaTime;
+        shockedTimer -= Time.deltaTime;
+
+        igniteDamageTimer -= Time.deltaTime;
+
+        if (ignitedTimer < 0)
+        {
+            isIgnited = false;
+        }
+
+        if (chilledTimer < 0)
+        {
+            isChilled = false;
+        }
+
+        if(shockedTimer < 0)
+        {
+            isShocked = false;
+        }
+
+        if (igniteDamageTimer < 0 && isIgnited)
+        {
+            Debug.Log("burn!" + igniteDamage);
+            TakeDamage(igniteDamage);
+            igniteDamageTimer = igniteDamageCooldown;
+        }
+    }
+
+    public void SetupIgniteDamage(int _damage) => igniteDamage = _damage;
+
     public virtual void DoDamage(CharacterStats _targetStats)
     {
 
@@ -53,7 +94,7 @@ public class CharacterStats : MonoBehaviour
         }
 
         //DoPhysicalDamage(_targetStats);
-        //DoMagicalDamage(_targetStats);
+        DoMagicalDamage(_targetStats);
     }
 
     private void DoPhysicalDamage(CharacterStats _targetStats)
@@ -84,11 +125,36 @@ public class CharacterStats : MonoBehaviour
         //apply magic resistance
         totalMagicDamage = Mathf.RoundToInt((float)totalMagicDamage * (1 - 0.01f * _targetStats.magicResistance.GetValue()));
         _targetStats.TakeDamage(totalMagicDamage);
+
+
+
+        int maxDamage = Mathf.Max(_fireDamage, _iceDamage, _lightningDamage);
+        if (maxDamage <= 0)
+        {
+            return;
+        }
+
+        bool canApplyIgnite =  _fireDamage == maxDamage;
+        bool canApplyChill = !canApplyIgnite  && _iceDamage == maxDamage;
+        bool canApplyShock = !canApplyIgnite && !canApplyChill && _lightningDamage == maxDamage;
+
+        if (canApplyIgnite)
+        {
+            _targetStats.SetupIgniteDamage(Mathf.RoundToInt(_fireDamage * .2f));
+        }
+
+        _targetStats.ApplyAilments(canApplyIgnite, canApplyChill, canApplyShock);
     }
 
     private int ApplyArmorReduction(CharacterStats _targetStats, int totalDamage)
     {
         int armor = _targetStats.armor.GetValue();
+
+        if (_targetStats.isChilled) 
+        {
+            armor = Mathf.RoundToInt(armor * .8f);
+        }
+        
         int leastDamage = (int)(((float)totalDamage) * 0.05f);
         if (totalDamage >= (armor + leastDamage))
         {
@@ -102,9 +168,16 @@ public class CharacterStats : MonoBehaviour
         return totalDamage;
     }
 
-    private static bool TryAvoidAttack(CharacterStats _targetStats)
+    private bool TryAvoidAttack(CharacterStats _targetStats)
     {
         int totalEvasion = _targetStats.evasion.GetValue() + _targetStats.agility.GetValue();
+
+        if (isShocked)
+        {
+            totalEvasion += 20;
+        }
+
+
         if (Random.Range(0, 100) < totalEvasion)
         {
             Debug.Log("Miss");
@@ -121,12 +194,29 @@ public class CharacterStats : MonoBehaviour
         if (isIgnited || isChilled || isShocked)
         {
             //apply ailments only if target dont have any ailments
+            
             return;
         }
 
-        isIgnited = _ignite;
-        isChilled = _chill;
-        isShocked = _shock;
+        if (_ignite)
+        {
+            isIgnited = _ignite;
+            ignitedTimer = 4;
+        }
+
+        if (_chill)
+        {
+            isChilled = _chill;
+            chilledTimer = 2;
+        }
+
+        if (_shock)
+        {
+            isShocked = _shock;
+            shockedTimer = 3;
+        }
+
+
     }
     public virtual void TakeDamage(int _damage)
     {

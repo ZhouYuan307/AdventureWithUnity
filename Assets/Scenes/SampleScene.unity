@@ -566,7 +566,7 @@ MonoBehaviour:
     baseValue: 15
     modifiers: 
   fireDamage:
-    baseValue: 0
+    baseValue: 10
     modifiers: 
   iceDamage:
     baseValue: 0
@@ -9263,13 +9263,13 @@ MonoBehaviour:
     baseValue: 0
     modifiers: 
   fireDamage:
-    baseValue: 10
+    baseValue: 0
     modifiers: 
   iceDamage:
-    baseValue: 10
+    baseValue: 0
     modifiers: 
   lightningDamage:
-    baseValue: 10
+    baseValue: 0
     modifiers: 
   isIgnited: 0
   isChilled: 0
