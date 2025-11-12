@@ -40,13 +40,14 @@ public class CharacterStats : MonoBehaviour
     private int igniteDamage;
 
 
-    [SerializeField]private int currentHealth;
+    public int currentHealth;
 
+    public System.Action onHealthChanged;
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        currentHealth = maxHealth.GetValue();
+        currentHealth = GetMaxHealthValue();
         critPower.SetDefaultValue(150);
         isMiss = false;
     }
@@ -93,7 +94,7 @@ public class CharacterStats : MonoBehaviour
             return;
         }
 
-        //DoPhysicalDamage(_targetStats);
+        DoPhysicalDamage(_targetStats);
         DoMagicalDamage(_targetStats);
     }
 
@@ -221,7 +222,7 @@ public class CharacterStats : MonoBehaviour
     public virtual void TakeDamage(int _damage)
     {
         currentHealth -= _damage;
-
+        onHealthChanged?.Invoke();
         if (currentHealth < 0)
         {
             Die();
@@ -258,4 +259,9 @@ public class CharacterStats : MonoBehaviour
     }
 
     public bool GetMissState() { return isMiss; }
+
+    public int GetMaxHealthValue()
+    {
+        return maxHealth.GetValue() + vitality.GetValue() * 5;
+    }
 }
