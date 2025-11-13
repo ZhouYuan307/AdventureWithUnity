@@ -634,8 +634,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c0f995ec98f22649a1e2eda65f14fc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flashDuration: 0.1
+  flashDuration: 0.2
   hitMat: {fileID: 2100000, guid: 4355e89df76a97947a40ae4bc9a55be8, type: 2}
+  chillColor:
+  - {r: 0.61960787, g: 0.8509804, b: 0.972549, a: 1}
+  - {r: 0.61877, g: 0.8491536, b: 0.9716981, a: 1}
+  igniteColor:
+  - {r: 0.74509805, g: 0.18039216, b: 0, a: 1}
+  - {r: 1, g: 0.6, b: 0.6, a: 1}
+  shockColor:
+  - {r: 0.9950382, g: 1, b: 0.48584908, a: 1}
+  - {r: 1, g: 0.9606918, b: 0.7783019, a: 1}
 --- !u!114 &190927338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -682,10 +691,10 @@ MonoBehaviour:
     baseValue: 15
     modifiers: 
   fireDamage:
-    baseValue: 10
+    baseValue: 0
     modifiers: 
   iceDamage:
-    baseValue: 0
+    baseValue: 30
     modifiers: 
   lightningDamage:
     baseValue: 0
@@ -9774,6 +9783,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flashDuration: 0.2
   hitMat: {fileID: 2100000, guid: 4355e89df76a97947a40ae4bc9a55be8, type: 2}
+  chillColor:
+  - {r: 0.61960787, g: 0.8509804, b: 0.972549, a: 1}
+  - {r: 0.61960787, g: 0.8509804, b: 0.972549, a: 1}
+  igniteColor:
+  - {r: 0.74509805, g: 0.18039216, b: 0, a: 1}
+  - {r: 1, g: 0.6, b: 0.6, a: 1}
+  shockColor:
+  - {r: 0.9950382, g: 1, b: 0.48584908, a: 1}
+  - {r: 1, g: 0.9606918, b: 0.7783019, a: 1}
 --- !u!114 &1280714795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9814,7 +9832,7 @@ MonoBehaviour:
     baseValue: 10
     modifiers: 
   evasion:
-    baseValue: 50
+    baseValue: 20
     modifiers: 
   magicResistance:
     baseValue: 0

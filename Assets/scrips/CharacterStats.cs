@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
+    private EntityFX fx;
+
     [Header("Major stats")]
     public Stat strength; //increase damage
     public Stat agility; //increase evasion
@@ -47,6 +49,7 @@ public class CharacterStats : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Start()
     {
+        fx = GetComponent<EntityFX>();
         currentHealth = GetMaxHealthValue();
         critPower.SetDefaultValue(150);
         isMiss = false;
@@ -202,19 +205,22 @@ public class CharacterStats : MonoBehaviour
         if (_ignite)
         {
             isIgnited = _ignite;
-            ignitedTimer = 4;
+            ignitedTimer = 3;
+            fx.IgniteFXFor(3);
         }
 
         if (_chill)
         {
             isChilled = _chill;
             chilledTimer = 2;
+            fx.ChillFXFor(2);
         }
 
         if (_shock)
         {
             isShocked = _shock;
             shockedTimer = 3;
+            fx.ShockFXFor(3);
         }
 
 
