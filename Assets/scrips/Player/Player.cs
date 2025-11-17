@@ -15,15 +15,20 @@ public class Player : Entity
     public float moveSpeed = 12f;
     public float jumpForce;
     public float swordReturnImpact;
+    private float defaultMoveSpeed;
+    private float defaultJumpForce;
+
 
     [Header("Dash info")]
     public float dashSpeed;
     public float dashDuration;
+    private float defaultDashSpeed;
     public float dashDir {  get; private set; }
 
     [Header("Slide tackle info")]
     [SerializeField]public float slideTackleCoolDown;
     public float slideTackleSpeed;
+    private float defaultSlideTackleSpeed;
     public float slideTackleDuration;
 
 
@@ -97,6 +102,12 @@ public class Player : Entity
         base.Start();
         skill = SkillManager.instance;
         stateMachine.Initialize(idleState);
+
+
+        defaultMoveSpeed = moveSpeed;
+        defaultJumpForce = jumpForce;
+        defaultDashSpeed = dashSpeed;
+        defaultSlideTackleSpeed = slideTackleSpeed;
     }
 
     protected override void Update()
@@ -109,6 +120,27 @@ public class Player : Entity
             skill.crystal.TryUseSkill();
         }
     }
+
+    public override void SlowEntityBy(float _slowPercentage, float _slowDuration)
+    {
+        moveSpeed *= (1 - _slowPercentage);
+        jumpForce *= (1 - _slowPercentage);
+        dashSpeed *= (1 - _slowPercentage);
+        slideTackleSpeed *= (1 - _slowPercentage);
+        anim.speed *= (1 - _slowPercentage);
+
+        Invoke("BackToDefaultSpeed", _slowDuration);
+    }
+
+    protected override void BackToDefaultSpeed()
+    {
+        base.BackToDefaultSpeed();
+        moveSpeed = defaultMoveSpeed;
+        jumpForce = defaultJumpForce;
+        dashSpeed = defaultDashSpeed;
+        slideTackleSpeed = defaultSlideTackleSpeed;
+    }
+
 
     public void AssignNewSword(GameObject _newSword)
     {

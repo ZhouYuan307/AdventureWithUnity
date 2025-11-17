@@ -33,6 +33,10 @@ public class CharacterStats : MonoBehaviour
     public bool isChilled;  //reduce armor by 20%
     public bool isShocked;  //reduce accuracy by 20%
 
+    public float chillDuration;
+    public float igniteDuration;
+    public float shockDuration;
+
     private float ignitedTimer;
     private float chilledTimer;
     private float shockedTimer;
@@ -205,22 +209,24 @@ public class CharacterStats : MonoBehaviour
         if (_ignite)
         {
             isIgnited = _ignite;
-            ignitedTimer = 3;
-            fx.IgniteFXFor(3);
+            ignitedTimer = igniteDuration;
+            fx.IgniteFXFor(igniteDuration);
         }
 
         if (_chill)
         {
             isChilled = _chill;
-            chilledTimer = 2;
-            fx.ChillFXFor(2);
+            chilledTimer = chillDuration;
+            float slowPercentage = .2f;
+            GetComponent<Entity>().SlowEntityBy(slowPercentage, chillDuration);
+            fx.ChillFXFor(chillDuration);
         }
 
         if (_shock)
         {
             isShocked = _shock;
-            shockedTimer = 3;
-            fx.ShockFXFor(3);
+            shockedTimer = shockDuration;
+            fx.ShockFXFor(shockDuration);
         }
 
 

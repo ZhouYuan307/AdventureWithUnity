@@ -42,6 +42,21 @@ public class Enemy : Entity
         stateMachine.currentState.Update();
     }
 
+    public override void SlowEntityBy(float _slowPercentage, float _slowDuration)
+    {
+        moveSpeed *= (1 - _slowPercentage);
+        anim.speed *= (1- _slowPercentage);
+        Invoke("BackToDefaultSpeed", _slowDuration);
+    }
+
+
+    protected override void BackToDefaultSpeed()
+    {
+        base.BackToDefaultSpeed();
+        moveSpeed = defaultSpeed;
+    }
+
+
     public virtual void AssignLastAnimName(string _animBoolName)
     {
         lastAnimBoolName = _animBoolName;
