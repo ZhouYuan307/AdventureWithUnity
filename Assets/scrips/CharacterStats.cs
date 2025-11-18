@@ -29,6 +29,7 @@ public class CharacterStats : MonoBehaviour
     public Stat iceDamage;
     public Stat lightningDamage;
 
+    //current ailment
     public bool isIgnited;  //do damage over time
     public bool isChilled;  //reduce armor by 20%
     public bool isShocked;  //reduce accuracy by 20%
@@ -44,6 +45,8 @@ public class CharacterStats : MonoBehaviour
     private float igniteDamageCooldown = .5f;
     private float igniteDamageTimer;
     private int igniteDamage;
+    [SerializeField] private GameObject thunderStrikePrefab;
+    private int shockDamage;
 
 
     public int currentHealth;
@@ -91,6 +94,7 @@ public class CharacterStats : MonoBehaviour
     }
 
     public void SetupIgniteDamage(int _damage) => igniteDamage = _damage;
+    public void SetupShockDamage(int _damage) => shockDamage = _damage;
 
     public virtual void DoDamage(CharacterStats _targetStats)
     {
@@ -151,6 +155,12 @@ public class CharacterStats : MonoBehaviour
             _targetStats.SetupIgniteDamage(Mathf.RoundToInt(_fireDamage * .2f));
         }
 
+
+        if (canApplyShock)
+        {
+            _targetStats.SetupShockDamage(Mathf.RoundToInt(_lightningDamage * .1f));
+        }
+
         _targetStats.ApplyAilments(canApplyIgnite, canApplyChill, canApplyShock);
     }
 
@@ -198,22 +208,17 @@ public class CharacterStats : MonoBehaviour
 
     public void ApplyAilments(bool _ignite, bool _chill, bool _shock)
     {
-
-        if (isIgnited || isChilled || isShocked)
-        {
-            //apply ailments only if target dont have any ailments
-            
-            return;
-        }
-
-        if (_ignite)
+        bool canApplyIgnite = !isIgnited && !isChilled && !isShocked;
+        bool canApplyChill = !isIgnited && !isChilled && !isShocked;
+        bool canApplyShock = !isIgnited && !isChilled;
+        if (_ignite && canApplyIgnite)
         {
             isIgnited = _ignite;
             ignitedTimer = igniteDuration;
             fx.IgniteFXFor(igniteDuration);
         }
 
-        if (_chill)
+        if (_chill && canApplyChill)
         {
             isChilled = _chill;
             chilledTimer = chillDuration;
@@ -222,19 +227,75 @@ public class CharacterStats : MonoBehaviour
             fx.ChillFXFor(chillDuration);
         }
 
-        if (_shock)
+        if (_shock && canApplyShock)
         {
-            isShocked = _shock;
-            shockedTimer = shockDuration;
-            fx.ShockFXFor(shockDuration);
+            if (!isShocked)
+            {
+                //first lightning attack do these
+                ApplyShock(_shock);
+            }
+            else
+            {
+                //do ThunderStrike
+
+                //at this time it wont work on player
+                if (GetComponent<Player>() != null)
+                {
+                    return;
+                }
+
+                HitNearestTargetWithThunder();
+            }
+
         }
 
 
     }
+
+    public void ApplyShock(bool _shock)
+    {
+        if (isShocked)
+        {
+            return;
+        }
+        isShocked = _shock;
+        shockedTimer = shockDuration;
+        fx.ShockFXFor(shockDuration);
+    }
+
+    private void HitNearestTargetWithThunder()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 25);
+        float closestDistance = Mathf.Infinity;
+        Transform closestEnemy = null;
+        foreach (var hit in colliders)
+        {
+            if (hit.GetComponent<Enemy>() != null && hit != this.GetComponent<Collider2D>())
+            {
+                float diatanceToEnemy = Vector2.Distance(transform.position, hit.transform.position);
+                if (diatanceToEnemy < closestDistance)
+                {
+                    closestDistance = diatanceToEnemy;
+                    closestEnemy = hit.transform;
+                }
+            }
+        }
+
+        if (closestEnemy == null)
+        {
+            closestEnemy = this.transform;
+        }
+        GameObject newShockStrike = Instantiate(thunderStrikePrefab, transform.position, Quaternion.identity);
+        newShockStrike.GetComponent<ThunderStrikeController>().Setup(shockDamage, closestEnemy.GetComponent<CharacterStats>());
+    }
+
     public virtual void TakeDamage(int _damage)
     {
         currentHealth -= _damage;
+
+        //change UI
         onHealthChanged?.Invoke();
+
         if (currentHealth < 0)
         {
             Die();

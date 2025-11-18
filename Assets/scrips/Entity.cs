@@ -78,6 +78,13 @@ public class Entity : MonoBehaviour
         StartCoroutine("HitKnockback", hitDir);
     }
 
+    public virtual void DamageFX()
+    {
+        float hitDir = -facingDir;
+        fx.StartCoroutine("FlashFX");
+        StartCoroutine("HitKnockback", hitDir);
+    }
+
     protected virtual IEnumerator HitKnockback(float hitDir)
     {
         isKnocked = true;
