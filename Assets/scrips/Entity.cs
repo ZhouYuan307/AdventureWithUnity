@@ -73,6 +73,12 @@ public class Entity : MonoBehaviour
 
     public virtual void DamageFX(Vector2 positionOfHitter)
     {
+        stats = GetComponent<CharacterStats>();
+        if (stats.GetMissState())
+        {
+            stats.SetMissState(false);
+            return;
+        }
         float hitDir = Sign(rb.position.x - positionOfHitter.x);
         fx.StartCoroutine("FlashFX");
         StartCoroutine("HitKnockback", hitDir);
@@ -80,6 +86,12 @@ public class Entity : MonoBehaviour
 
     public virtual void DamageFX()
     {
+        stats = GetComponent<CharacterStats>();
+        if (stats.GetMissState())
+        {
+            stats.SetMissState(false);
+            return;
+        }
         float hitDir = -facingDir;
         fx.StartCoroutine("FlashFX");
         StartCoroutine("HitKnockback", hitDir);
@@ -151,17 +163,7 @@ public class Entity : MonoBehaviour
     #endregion
 
 
-    public void MakeTransparent(bool _transparent)
-    {
-        if (_transparent)
-        {
-            sr.color = Color.clear;
-        }
-        else
-        {
-            sr.color = Color.white;
-        }
-    }
+
 
     public virtual void Die()
     {

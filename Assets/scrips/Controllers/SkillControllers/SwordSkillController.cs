@@ -210,6 +210,8 @@ public class SwordSkillController : SkillController
     
     private void SwordSkillDamage(Enemy enemy)
     {
+        EnemyStats _target = enemy.GetComponent<EnemyStats>();
+        PlayerManager.instance.player.stats.DoDamage(_target, CharacterStats.AttackType.Physical);
         enemy.DamageFX(transform.position);
         //enemy.StartCoroutine("FreezeTimeFor", .7f);
     }

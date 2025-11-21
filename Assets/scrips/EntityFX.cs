@@ -23,6 +23,8 @@ public class EntityFX : MonoBehaviour
         originalMat = sr.material;
     }
 
+
+
     private IEnumerator FlashFX()
     { 
 
@@ -104,6 +106,18 @@ public class EntityFX : MonoBehaviour
         else
         {
             sr.color = chillColor[1];
+        }
+    }
+
+    public void MakeTransparent(bool _transparent)
+    {
+        if (_transparent)
+        {
+            sr.color = Color.clear;
+        }
+        else
+        {
+            sr.color = Color.white;
         }
     }
 

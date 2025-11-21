@@ -100,7 +100,7 @@ public class BlackHoleSkillController : SkillController
         if (playerCanDisapear) 
         { 
             playerCanDisapear = false;
-            PlayerManager.instance.player.MakeTransparent(true); 
+            PlayerManager.instance.player.fx.MakeTransparent(true); 
         }
 
         

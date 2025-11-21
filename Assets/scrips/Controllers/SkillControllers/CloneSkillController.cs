@@ -67,7 +67,8 @@ public class CloneSkillController : SkillController
         {
             if (hit.GetComponent<Enemy>() != null)
             {
-
+                EnemyStats _target = hit.GetComponent<EnemyStats>();
+                PlayerManager.instance.player.stats.DoDamage(_target, CharacterStats.AttackType.Physical);
                 hit.GetComponent<Enemy>().DamageFX(transform.position);
 
                 if (canDuplicateClone)
