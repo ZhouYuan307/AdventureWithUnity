@@ -100,7 +100,9 @@ public class BlackHoleSkillController : SkillController
         if (playerCanDisapear) 
         { 
             playerCanDisapear = false;
-            PlayerManager.instance.player.fx.MakeTransparent(true); 
+            PlayerManager.instance.player.fx.MakeTransparent(true);
+            PlayerManager.instance.player.healthBar.MakeTransparent(true);
+
         }
 
         
@@ -115,7 +117,7 @@ public class BlackHoleSkillController : SkillController
             int randomIndex = Random.Range(0, targets.Count);
             float xOffset;
 
-            xOffset = (Random.Range(0, 100) > 50) ? 2 : -2;
+            xOffset = (Random.Range(0, 100) > 50) ? 1 : -1;
             SkillManager.instance.clone.CreateClone(targets[randomIndex], new Vector3(xOffset, 0, 0),false);
 
             amountOfAttacks--;

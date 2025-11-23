@@ -18,6 +18,8 @@ public class Entity : MonoBehaviour
     public CharacterStats stats { get; private set; }
 
     public CapsuleCollider2D cd {get; private set; }
+
+    public HealthBarUI healthBar { get; private set; }
     
     #endregion
     [Header("Knockback info")]
@@ -54,6 +56,7 @@ public class Entity : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         stats = GetComponent<CharacterStats>();
         cd = GetComponent<CapsuleCollider2D>();
+        healthBar = GetComponentInChildren<HealthBarUI>();
     }
 
     protected virtual void Update()

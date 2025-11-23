@@ -32,6 +32,7 @@ public class PlayerBlackHoleState : PlayerState
         base.Exit();
         player.rb.gravityScale = defaultGravity;
         player.fx.MakeTransparent(false);
+        player.healthBar.MakeTransparent(false);
     }
 
     public override void Update()
